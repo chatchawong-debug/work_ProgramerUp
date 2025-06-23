@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>การใช้ prompt</title>
+</head>
+<body>
+    <center><h1>การใช้ prompt</h1></center>
+    <script>
+        let name = prompt('name : ');
+        let ageInt = prompt('age :');
+        console.log(typeof(ageInt));
+        let age = parseInt(ageInt);
+        console.log(typeof (age));
+
+        let birthYear = 2568 - age;
+
+        let mergename = `ชื่อ ${name}\n อายุ ${age} ปี\n ปีปัจจุบัน 2568 เกิดปี ${birthYear}`;
+        console.log(mergename);
+    </script>
+</body>
+</html>
