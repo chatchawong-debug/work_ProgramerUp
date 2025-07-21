@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ตรวจสอบอายุบรรลุนิติภาวะ</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        background-color: #f4f4f4;
+        color: #333;
+      }
+      h2 {
+        color: #0056b3;
+      }
+      input[type="number"] {
+        padding: 8px;
+        margin-right: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+      button {
+        padding: 10px 15px;
+        background-color: #28a745;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+      button:hover {
+        background-color: #218838;
+      }
+      hr {
+        margin: 20px 0;
+        border: 0;
+        border-top: 1px solid #eee;
+      }
+      #result {
+        margin-top: 15px;
+        font-size: 1.2em;
+        font-weight: bold;
+        color: #007bff; /* Default color for result */
+      }
+      /* Optional: Add specific colors based on result */
+      #result.adult {
+        color: green;
+      }
+      #result.minor {
+        color: orange;
+      }
+      #result.error {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>ตรวจสอบอายุบรรลุนิติภาวะ</h2>
+
+    <input type="number" id="ageInput" placeholder="กรอกอายุของคุณ" />
+
+    <button onclick="checkAge()">ตรวจสอบ</button>
+
+    <hr />
+
+    <div id="result"></div>
+
+    <script>
+      // ฟังก์ชันที่รับอายุ แล้วตรวจสอบว่าเกิน 18 หรือไม่
+      function isAdult(age) {
+        // รับพารามิเตอร์ชื่อ 'age'
+        if (age >= 18) {
+          return "คุณบรรลุนิติภาวะแล้ว ✅";
+        } else {
+          return "คุณยังไม่บรรลุนิติภาวะ ❌";
+        }
+      }
+
+      // ฟังก์ชันหลักที่รับค่าจาก input แล้วแสดงผล
+      function checkAge() {
+        // ชื่อฟังก์ชันหลัก
+        // อ่านค่าที่ผู้ใช้กรอกและแปลงเป็นตัวเลข
+        const ageInputVal = document.getElementById("ageInput").value; // ดึงค่าจาก input
+        const age = parseInt(ageInputVal);
+
+        let message;
+        let resultDiv = document.getElementById("result");
+        resultDiv.className = ""; // Clear previous classes
+
+        // ตรวจสอบว่า age เป็นตัวเลขที่ถูกต้องหรือไม่
+        if (isNaN(age) || ageInputVal.trim() === "") {
+          message = "กรุณากรอกอายุเป็นตัวเลขที่ถูกต้อง!";
+          resultDiv.classList.add("error");
+        } else if (age < 0) {
+          // เพิ่มการตรวจสอบอายุติดลบ
+          message = "อายุต้องไม่ติดลบ!";
+          resultDiv.classList.add("error");
+        } else {
+          // เรียกใช้ฟังก์ชัน isAdult เพื่อประมวลผล
+          message = isAdult(age); // เก็บผลลัพธ์ที่ได้จาก isAdult()
+          if (age >= 18) {
+            resultDiv.classList.add("adult");
+          } else {
+            resultDiv.classList.add("minor");
+          }
+        }
+
+        // แสดงข้อความผลลัพธ์ในหน้าเว็บด้วย innerHTML
+        resultDiv.innerHTML = message; // แสดงผลลัพธ์ใน div id="result"
+      }
+    </script>
+  </body>
+</html>

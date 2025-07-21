@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>โปรแกรมคำนวณเกรด</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z'%3E%3C/path%3E%3Cpolyline points='14 2 14 8 20 8'%3E%3C/polyline%3E%3Cline x1='16' y1='13' x2='8' y2='13'%3E%3C/line%3E%3Cline x1='16' y1='17' x2='8' y2='17'%3E%3C/line%3E%3Cpolyline points='10 9 9 8 8 9'%3E%3C/polyline%3E%3C/svg%3E" type="image/svg+xml">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #FFEAD9; /* Your preferred background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* Full viewport height */
+            margin: 0;
+            color: #333;
+            text-align: center;
+        }
+        .container {
+            background-color: #FFFFFF;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 90%;
+            border: 1px solid #F0E0D0;
+        }
+        h1 {
+            color: #4A90E2;
+            margin-bottom: 25px;
+            font-size: 2.2em;
+        }
+        p {
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            color: #555;
+        }
+        h3 {
+            margin-top: 20px;
+            font-size: 1.5em;
+        }
+        .grade-a { color: #28a745; } /* Green */
+        .grade-b { color: #17a2b8; } /* Teal */
+        .grade-c { color: #ffc107; } /* Yellow/Orange */
+        .grade-d { color: #fd7e14; } /* Orange */
+        .grade-fail { color: #dc3545; } /* Red */
+        .grade-error { color: #6c757d; } /* Grey */
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📊 โปรแกรมคำนวณเกรดอัตโนมัติ 📚</h1>
+        <div id="result">
+            </div>
+    </div>
+
+    <script>
+        // รับค่าคะแนนจากผู้ใช้
+        let scoreInput = prompt("กรุณากรอกคะแนนของคุณ (0 - 100):");
+        let score = parseFloat(scoreInput);
+        const resultDiv = document.getElementById('result');
+
+        // ตรวจสอบว่าเป็นตัวเลขและอยู่ในช่วงที่ถูกต้อง
+        if (!isNaN(score) && score >= 0 && score <= 100) {
+            switch (true) {
+                case score >= 80:
+                    resultDiv.innerHTML = `<h3 class="grade-a">🎉 ได้เกรด A ยอดเยี่ยมมาก! (${score} คะแนน)</h3>`;
+                    console.log(`ได้เกรด A = ${score} คะแนน`);
+                    break;
+                case score >= 70:
+                    resultDiv.innerHTML = `<h3 class="grade-b">👏 ได้เกรด B เยี่ยมเลย! (${score} คะแนน)</h3>`;
+                    console.log(`ได้เกรด B = ${score} คะแนน`);
+                    break;
+                case score >= 60:
+                    resultDiv.innerHTML = `<h3 class="grade-c">👍 ได้เกรด C ดีมาก! (${score} คะแนน)</h3>`;
+                    console.log(`ได้เกรด C = ${score} คะแนน`);
+                    break;
+                case score >= 50:
+                    resultDiv.innerHTML = `<h3 class="grade-d">👌 ได้เกรด D ผ่านแล้ว! (${score} คะแนน)</h3>`;
+                    console.log(`ได้เกรด D = ${score} คะแนน`);
+                    break;
+                default: // คะแนนต่ำกว่า 50
+                    resultDiv.innerHTML = `<h3 class="grade-fail">😔 สอบไม่ผ่าน (${score} คะแนน)</h3>`;
+                    console.log(`สอบไม่ผ่าน = ${score} คะแนน`);
+                    break;
+            }
+        } else {
+            resultDiv.innerHTML = `<h3 class="grade-error">⚠️ กรุณากรอกคะแนนที่ถูกต้อง (0 - 100)</h3>`;
+            console.log("Error: Invalid score input.");
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+
+<body bgcolor="#E7D3EE">
+    <center><h2>การวนซ้ำ while</h2></center>
+    <script>
+        let input = prompt("พิมพ์ข้อความ (จบ = End :)"); // รับค่าครั้งแรก
+        let result =" "; // สร้างตัวแปรไว้เก็บข้อความที่ผู้ใช้ป้อน
+        while (input !== "จบ") { // เช็กว่าผู้ใช้พิมพ์ จบ หรือไม่
+            result += input + " "; // รวมข้อความแต่ละรอบไว้
+            input = prompt("พิมพ์ข้อความ (จบ = End :)");// รับค่ารอบถัดไป
+        }
+
+        // แสดงผลลัพธ์บนหน้าเว็บ
+        document.write("<h3>คุณได้ป้อนข้อความดังนี้: </h3>");
+        document.write("<p style='color:#F68B71 ; font-size: 18px;'>" + result + "</p>");
+    </script>
+</body>
+
+</html>

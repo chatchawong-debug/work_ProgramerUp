@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body bgcolor="#FFEAD9">
+    <script>
+      let scoreInput = prompt("คะแนนของคุณ (0 -100):");
+      let score = parseFloat(scoreInput);
+      // ตรวจสอบว่าเป็นตัวเลขและอยู่ในช่วงที่ถูกต้อง
+      if (!isNaN(score) && score >= 0 && score <= 100) {
+      // เงื่อนไข if เพื่อตรวจสอบผ่าน / ไม่ผ่าน
+        if (score >= 80) {
+            document.write(`<h3 style="color:#A2FAC0;"> ได้เกรด A  = ${score} คะแนน</h3>`);
+            console.log(`ได้เกรด A  = ${score} คะแนน`);}
+        else if(score >= 70) {
+            document.write(`<h3 style="color:#5D8D73;"> ได้เกรด B  = ${score} คะแนน</h3>`);
+            console.log(`ได้เกรด B  = ${score} คะแนน`);}
+        else if(score >= 60) {
+            document.write(`<h3 style="color: #FEC4A2;"> ได้เกรด C  = ${score} คะแนน</h3>`);
+            console.log(`ได้เกรด C  = ${score} คะแนน`);}
+        else if (score >= 50) {
+            document.write(`<h3 style="color: #FFC77A;"> ได้เกรด D  = ${score} คะแนน</h3>`);
+            console.log(`ได้เกรด D  = ${score} คะแนน`);
+        } else {
+            document.write(`<h3 style="color:#F68B71;"> สอบไม่ผ่าน = ${score} คะแนน</h3>`);
+            console.log(`สอบไม่ผ่าน = ${score} คะแนน`);}
+      } else {
+        document.write(`<h3 style="color: #FFB6B7;"> กรอกคะแนนที่ถูกต้อง (0 -100)</h3>`);
+        console.log("Error");
+      }
+    </script>
+</body>
+</html>

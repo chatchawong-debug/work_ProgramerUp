@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/style.css" />
+    <title>ใบสั่งซื้อสินค้า</title>
+    <style>
+      body {
+        font-family: Tahoma, sans-serif;
+        max-width: 600px;
+        margin: 20px auto;
+      }
+      .receipt {
+        border-top: 1px dashed #888;
+        margin-top: 20px;
+        padding-top: 10px;
+      }
+      .error {
+        color: red;
+      }
+      .success {
+        color: green;
+      }
+      input[type="number"] {
+        width: 60px;
+        padding: 5px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h2>ระบบสั่งซื้อสินค้า</h2>
+    <!-- แบบฟอร์มสินค้า -->
+    <form onsubmit="return processOrder()">
+      <!-- รายการสินค้าเดียว -->
+      <p><strong>สินค้า:</strong> รองเท้าลายวัว</p>
+      <p><strong>ราคาต่อชิ้น:</strong> <span id="price">230</span> บาท</p>
+      <!-- ป้อนจำนวนสินค้า จำกัดระหว่าง 1–100 -->
+      <p>
+        <label for="qty">จำนวน:</label>
+        <input type="number" id="qty" value="1" onchange="updateTotal()" />
+      </p>
+      <!-- แสดงราคารวมทันที-->
+      <p><strong>ราคารวม:</strong> <span id="total">230</span> บาท</p>
+      <!-- พื้นที่แสดงข้อความ -->
+      <p id="message"></p>
+      <!-- ปุ่มส่งฟอร์ม -->
+      <button type="submit">ยืนยันการสั่งซื้อ</button>
+    </form>
+    <!-- พื้นที่แสดงใบเสร็จ -->
+    <div id="receipt" class="receipt"></div>
+    <script>
+      // ฟังก์ชันอัปเดตราคารวมเมื่อจำนวนสินค้าเปลี่ยน
+      function updateTotal() {
+        const qty = parseInt(document.getElementById("qty").value);
+        const price = parseFloat(document.getElementById("price").textContent);
+        const total = Math.min(Math.max(qty, 1), 100) * price;
+        document.getElementById("total").textContent = total;
+        return processOrder();
+      }
+      // ฟังก์ชันประมวลผลเมื่อกดยืนยันการสั่งซื้อ
+      function processOrder() {
+        const qtyInput = document.getElementById("qty");
+        let qty = parseInt(qtyInput.value);
+        const price = parseFloat(document.getElementById("price").textContent);
+        const messageBox = document.getElementById("message");
+        const receiptBox = document.getElementById("receipt");
+        // ตรวจสอบค่าจำนวนสินค้าว่าอยู่ในช่วง 1–100 หรือไม่
+        if (isNaN(qty) || qty < 0 || qty > 100) {
+          messageBox.textContent = "❌ กรุณาป้อนจำนวนสินค้าไม่เกิน 100";
+          messageBox.className = "error";
+          receiptBox.innerHTML = ""; // ล้างใบเสร็จถ้ามี
+          return false;
+        }
+
+        // คำนวณราคารวม
+        const total = qty * price;
+        // แสดงข้อความสำเร็จ
+        messageBox.textContent = "✅การสั่งซื้อสำเร็จ!";
+        messageBox.className = "success";
+        // สร้างใบเสร็จอย่างง่าย
+        const receiptHTML = `
+            <h3>ใบเสร็จ</h3>
+            <p>สินค้า: รองเท้าลายวัว</p>
+            <p>ราคาต่อชิ้น: ${price} บาท</p >
+            <p>จำนวน: ${qty} ชิ้น</p>
+            <p><strong>รวมทั้งสิ้น: ${total} บาท</strong></p> `;
+        receiptBox.innerHTML = receiptHTML;
+        return false; // ไม่ส่งฟอร์มจริง
+      }
+    </script>
+  </body>
+</html>

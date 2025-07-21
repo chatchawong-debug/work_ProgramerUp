@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+
+      // รับค่าคะแนนจากผู้ใช้
+      let scoreInput = prompt("กรุณากรอกคะแนนของคุณ (0 -100):");
+      let score = parseFloat(scoreInput);
+
+      // ตรวจสอบว่าเป็นตัวเลขและอยู่ในช่วงที่ถูกต้อง
+      if (!isNaN(score) && score >= 0 && score <= 100) {
+      // เงื่อนไข if เพื่อตรวจสอบผ่าน / ไม่ผ่าน
+        if (score >= 50) {
+            document.write(`<h3 style="color: green;">คุณสอบผ่าน ด้วยคะแนน ${score} คะแนน</h3>`);
+            console.log(`สอบผ่าน: ${score} คะแนน`);
+        } else {
+            document.write(`<h3 style="color: red;">คุณสอบไม่ผ่าน ด้วยคะแนน ${score} คะแนน</h3>`);
+            console.log(`สอบไม่ผ่าน: ${score} คะแนน`);
+        }
+      } else {
+        document.write(`<h3 style="color: blue;">กรุณากรอกคะแนนที่ถูกต้อง (0 -100)</h3>`);
+        console.log("ข้อมูลไม่ถูกต้อง");
+      }
+    </script>
+  </body>
+</html>

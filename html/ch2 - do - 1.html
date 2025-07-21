@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body bgcolor="#E7D3EE">
+    <center><h3>การรับคะแนนนักเรียนและหยุดเมื่อใส่ค่าว่าง</h3></center>
+    <script>
+      let total = 0; // ตัวแปรสะสมผลรวม
+      let count = 0; // ตัวแปรนับจำนวนนักเรียน
+      let score;
+      do {
+        // รับคะแนนจากผู้ใช้
+        score = prompt("กรุณากรอกคะแนนนักเรียน (Enter = End :)");
+        console.log("score=", score); // ตรวจสอบค่า score
+        if (score !== "") {
+          // แปลงค่าที่รับมาเป็นตัวเลขและสะสม
+          total += parseFloat(score);
+          count++;
+        }
+      } while (score !== ""); // หยุดเมื่อผู้ใช้ไม่กรอกอะไรเลย
+      // แสดงผลลัพธ์บนหน้าเว็บ
+      if (count > 0) {
+        const average = total / count;
+        document.write(`<p style=color:#44D26C> ป้อนคะแนนทั้งหมด ${count} คน </p>`);
+        document.write(`<p style=color:#c64120> รวมคะแนน: ${total} </p>`);
+        document.write(`<p style=color:#fe1d93> คะแนนเฉลี่ย: ${average.toFixed(2)} </p>`);
+      } else {
+        document.write("<p style=color:#FF0000>Error! No data</p>");
+      }
+    </script>
+  </body>
+</html>
