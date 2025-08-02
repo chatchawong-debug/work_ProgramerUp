@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>การโต้ตอบกับ JavaScript</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5; /* สีพื้นหลังอ่อนๆ */
+            color: #333;
+            margin: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* จัดให้อยู่กึ่งกลางหน้าจอ */
+            min-height: 90vh; /* ความสูงขั้นต่ำของ body */
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 30px 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 2em;
+        }
+
+        button {
+            background-color: #007bff; /* สีน้ำเงินสดใส */
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1em;
+            transition: background-color 0.3s ease;
+            margin-top: 15px;
+        }
+
+        button:hover {
+            background-color: #0056b3; /* สีน้ำเงินเข้มขึ้นเมื่อเมาส์ชี้ */
+        }
+
+        hr {
+            border: 0;
+            height: 1px;
+            background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0));
+            margin: 25px 0;
+            width: 80%; /* ความกว้างของเส้นคั่น */
+        }
+
+        p {
+            font-size: 1.1em;
+            color: #555;
+            margin-top: 15px;
+        }
+
+        #greeting {
+            color: #28a745; /* สีเขียวสำหรับข้อความต้อนรับ */
+            font-weight: bold;
+        }
+
+        #demo {
+            color: #dc3545; /* สีแดงสำหรับข้อความ "อ่านไม" */
+            font-style: italic;
+        }
+
+        #msg {
+            color: #6c757d; /* สีเทาสำหรับข้อความหลังจากคลิก "แสดงข้อความ" */
+            margin-top: 10px;
+            min-height: 20px; /* กันไม่ให้ p หายไปเมื่อไม่มีข้อความ */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2 id="greeting">ยินดีต้อนรับ</h2>
+        <button onclick="changeText()">เปลี่ยนข้อความ</button>
+    </div>
+
+    <div class="container">
+        <p id="demo">อ่านไม</p>
+    </div>
+
+    <div class="container">
+        <button onclick="showMessage()">แสดงข้อความ</button>
+        <p id="msg"></p>
+    </div>
+
+    <script>
+        function changeText() {
+            // ใช้ getElementById เพื่อเปลี่ยนข้อความใน <h2>
+            document.getElementById("greeting").innerHTML =
+                "<i><u>เรียนรู้เพิ่มเติม !</u></i>"; // เพิ่ม tag i และ u ให้สมบูรณ์
+        }
+
+        // โค้ดส่วนนี้จะทำงานทันทีที่หน้าเว็บโหลด
+        // ควรพิจารณาใส่ไว้ในฟังก์ชันที่เรียกใช้เมื่อจำเป็น (เช่น กดปุ่ม)
+        // หรือย้ายไปหลัง HTML หากต้องการให้อ่านเนื้อหา p ก่อนที่ alert จะเด้ง
+        let text = document.getElementById("demo").innerHTML;
+        alert("ข้อความใน <p>: " + text);
+
+
+        function showMessage() {
+            document.getElementById("msg").innerHTML = "จะกดทำไม!?";
+        }
+    </script>
+</body>
+</html>

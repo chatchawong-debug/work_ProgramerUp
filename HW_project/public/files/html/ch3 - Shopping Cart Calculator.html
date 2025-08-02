@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ใบสั่งซื้อสินค้า</title>
+    <style>
+      /* --- Global Styles --- */
+      body {
+        font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif; /* ฟอนต์ที่ดูสะอาดตา */
+        max-width: 500px; /* ลดความกว้างสูงสุดลงเพื่อให้ดู Compact ขึ้น */
+        margin: 40px auto; /* เพิ่ม Margin บน-ล่าง */
+        padding: 20px;
+        background-color: #f9f9f9; /* สีพื้นหลังอ่อนๆ */
+        color: #333; /* สีข้อความเข้มขึ้นเล็กน้อย */
+        line-height: 1.6; /* เพิ่มระยะห่างบรรทัด */
+      }
+
+      h2 {
+        text-align: center;
+        color: #555;
+        margin-bottom: 30px;
+        font-weight: 300; /* ทำให้ตัวหนังสือบางลง */
+        letter-spacing: 1px; /* เพิ่มระยะห่างตัวอักษรเล็กน้อย */
+      }
+
+      /* --- Form & Product Details --- */
+      form {
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 8px; /* มุมโค้งมนเล็กน้อย */
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* เงาบางๆ ให้ดูมีมิติ */
+        margin-bottom: 30px;
+      }
+
+      form p {
+        margin-bottom: 15px; /* เพิ่มระยะห่างระหว่างบรรทัดในฟอร์ม */
+        display: flex; /* ใช้ Flexbox เพื่อจัดวาง label และ input */
+        align-items: center;
+        justify-content: space-between; /* กระจายช่องว่าง */
+      }
+
+      form p strong {
+        color: #444;
+        flex-basis: 40%; /* กำหนดความกว้างของ label/strong */
+      }
+
+      form p span {
+        flex-basis: 55%; /* กำหนดความกว้างของค่า */
+        text-align: right;
+      }
+
+      input[type="number"] {
+        width: 80px; /* เพิ่มความกว้างเล็กน้อย */
+        padding: 8px 12px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 1rem;
+        text-align: center; /* จัดให้อยู่ตรงกลาง */
+        outline: none; /* ลบเส้นกรอบเมื่อ Focus */
+        transition: border-color 0.2s ease-in-out;
+      }
+
+      input[type="number"]:focus {
+        border-color: #007bff; /* สีขอบเมื่อ Focus */
+      }
+
+      label {
+        color: #555;
+      }
+
+      /* --- Buttons --- */
+      button[type="submit"] {
+        display: block; /* ทำให้ปุ่มอยู่บรรทัดใหม่ */
+        width: 100%; /* ให้ปุ่มเต็มความกว้าง */
+        padding: 12px 20px;
+        background-color: #007bff; /* สีปุ่มหลัก */
+        color: white;
+        border: none;
+        border-radius: 4px;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: background-color 0.2s ease-in-out;
+      }
+
+      button[type="submit"]:hover {
+        background-color: #0056b3; /* สีปุ่มเมื่อ Hover */
+      }
+
+      /* --- Messages --- */
+      #message {
+        text-align: center;
+        padding: 10px;
+        margin-top: 15px;
+        border-radius: 4px;
+        font-weight: 500;
+      }
+
+      .error {
+        color: #dc3545; /* สีแดงสำหรับ Error */
+        background-color: #f8d7da; /* พื้นหลังสีชมพูอ่อน */
+        border: 1px solid #f5c6cb;
+      }
+
+      .success {
+        color: #28a745; /* สีเขียวสำหรับ Success */
+        background-color: #d4edda; /* พื้นหลังสีเขียวอ่อน */
+        border: 1px solid #c3e6cb;
+      }
+
+      /* --- Receipt --- */
+      .receipt {
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        margin-top: 30px; /* เพิ่มระยะห่างจากฟอร์ม */
+        border-top: 1px solid #eee; /* ใช้เส้นบางๆ แทนเส้นประ */
+      }
+
+      .receipt h3 {
+        text-align: center;
+        color: #555;
+        margin-bottom: 20px;
+        font-weight: 400;
+        letter-spacing: 0.5px;
+        border-bottom: 1px solid #eee; /* เส้นใต้หัวข้อใบเสร็จ */
+        padding-bottom: 10px;
+      }
+
+      .receipt p {
+        margin-bottom: 10px;
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .receipt p strong {
+        color: #333;
+        font-size: 1.1rem; /* ทำให้ตัวอักษรของราคารวมใหญ่ขึ้น */
+      }
+    </style>
+  </head>
+
+  <body>
+    <h2>ระบบสั่งซื้อสินค้า</h2>
+
+    <form onsubmit="return processOrder()">
+      <p>
+        <strong>สินค้า:</strong>
+        <span>รองเท้าลายวัว</span>
+      </p>
+      <p>
+        <strong>ราคาต่อชิ้น:</strong>
+        <span id="price">230</span> บาท
+      </p>
+      <p>
+        <label for="qty">จำนวน:</label>
+        <input type="number" id="qty" value="1" onchange="updateTotal()" min="0" max="100" />
+      </p>
+      <p>
+        <strong>ราคารวม:</strong>
+        <span id="total">230</span> บาท
+      </p>
+
+      <p id="message"></p>
+
+      <button type="submit">ยืนยันการสั่งซื้อ</button>
+    </form>
+
+    <div id="receipt" class="receipt"></div>
+
+    <script>
+      // ฟังก์ชันอัปเดตราคารวมเมื่อจำนวนสินค้าเปลี่ยน
+      function updateTotal() {
+        const qty = parseInt(document.getElementById("qty").value);
+        const price = parseFloat(document.getElementById("price").textContent);
+        const total = Math.min(Math.max(qty, 0), 100) * price;
+        document.getElementById("total").textContent = total;
+        // เรียก processOrder เพื่ออัปเดตการแสดงผลใบเสร็จทันที
+        processOrder();
+      }
+
+      // ฟังก์ชันประมวลผลเมื่อกดยืนยันการสั่งซื้อ
+      function processOrder() {
+        const qtyInput = document.getElementById("qty");
+        let qty = parseInt(qtyInput.value);
+        const price = parseFloat(document.getElementById("price").textContent);
+        const messageBox = document.getElementById("message");
+        const receiptBox = document.getElementById("receipt");
+
+        // ตรวจสอบค่าจำนวนสินค้าว่าอยู่ในช่วง 0–100 หรือไม่
+        if (isNaN(qty) || qty < 0 || qty > 100) {
+          messageBox.textContent = "❌ กรุณาป้อนจำนวนสินค้า 0-100 ชิ้น";
+          messageBox.className = "error";
+          receiptBox.innerHTML = ""; // ล้างใบเสร็จถ้ามี
+          document.getElementById("total").textContent = 0; // ตั้งราคารวมเป็น 0
+          return false;
+        }
+
+        // ถ้าจำนวนสินค้าเป็น 0 ไม่ต้องแสดงใบเสร็จและข้อความสำเร็จ
+        if (qty === 0) {
+          messageBox.textContent = ""; // ล้างข้อความ
+          messageBox.className = ""; // ล้าง class
+          receiptBox.innerHTML = ""; // ล้างใบเสร็จ
+          document.getElementById("total").textContent = 0; // ตั้งราคารวมเป็น 0
+          return false;
+        }
+
+        // คำนวณราคารวม
+        const total = qty * price;
+
+        // แสดงข้อความสำเร็จ
+        messageBox.textContent = "✅ การสั่งซื้อสำเร็จ!";
+        messageBox.className = "success";
+
+        // สร้างใบเสร็จอย่างง่าย
+        const receiptHTML = `
+          <h3>ใบเสร็จ</h3>
+          <p><span>สินค้า:</span> <span>รองเท้าลายวัว</span></p>
+          <p><span>ราคาต่อชิ้น:</span> <span>${price} บาท</span></p>
+          <p><span>จำนวน:</span> <span>${qty} ชิ้น</span></p>
+          <p><strong><span>รวมทั้งสิ้น:</span> <span>${total} บาท</span></strong></p>`;
+        receiptBox.innerHTML = receiptHTML;
+
+        return false; // ไม่ส่งฟอร์มจริง
+      }
+
+      // เรียก updateTotal() ครั้งแรกเมื่อโหลดหน้าเว็บเพื่อให้ค่าเริ่มต้นถูกต้อง
+      document.addEventListener('DOMContentLoaded', updateTotal);
+    </script>
+  </body>
+</html>

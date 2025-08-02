@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ตรวจสอบฟอร์ม</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+      .error {
+        color: red;
+      }
+      .success {
+        color: green;
+      }
+      .message {
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>ฟอร์มเข้าสู่ระบบ</h2>
+    <form onsubmit="return validateForm()">
+      <label for="email">อีเมล:</label><br />
+      <input type="text" id="email" name="email" /><br /><br />
+      <label for="password">รหัสผ่าน:</label><br />
+      <input type="password" id="password" name="password" /><br /><br />
+      <input type="submit" value="เข้าสู่ระบบ" />
+    </form>
+    <div id="message" class="message"></div>
+    <script>
+      // ฟังก์ชันตรวจสอบฟอร์มก่อนส่ง
+      function validateForm() {
+        // รับค่าจาก input และลบช่องว่างหน้า-หลัง
+        let email = document.getElementById('email').value.trim(); // แก้ไขตรงนี้
+        let password = document.getElementById('password').value.trim(); // แก้ไขตรงนี้
+        // อ้างอิง <div> สำหรับแสดงข้อความ
+        let messageBox = document.getElementById('message'); // แก้ไขตรงนี้
+        // ล้างข้อความเดิม
+        messageBox.innerHTML = "";
+        messageBox.className = "message";
+        // ตรวจสอบว่ามีการกรอกข้อมูลหรือไม่
+        if (email === "" || password === "") {
+          messageBox.innerHTML = "❌กรุณากรอกข้อมูลให้ครบถ้วน";
+          messageBox.classList.add("error");
+          return false;
+        }
+
+        // ตรวจสอบรูปแบบอีเมลด้วย Regular Expression
+        let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailPattern.test(email)) {
+          messageBox.innerHTML = "❌รูปแบบอีเมลไม่ถูกต้อง เช่น yourname@example.com";
+          messageBox.classList.add("error");
+          return false;
+        }
+        // ตรวจสอบความยาวของรหัสผ่าน
+        if (password.length < 6) {
+          messageBox.innerHTML = "❌รหัสผ่านต้องมีอย่างน้อย 6 ตัวอักษร";
+          messageBox.classList.add("error");
+          return false;
+        }
+        // แสดงข้อความส าเร็จ
+        messageBox.innerHTML = "✅เข้าสู่ระบบสำเร็จ!";
+        messageBox.classList.add("success");
+        // ***สำคัญมาก: ถ้าต้องการให้ฟอร์ม submit เมื่อสำเร็จ ให้เปลี่ยนเป็น return true;***
+        return false; // ส าหรับการทดลอง: ไม่ส่งฟอร์มจริงไปที่server
+        //return true; // ถ้าต้องการให้ฟอร์มส่งไปเมื่อสำเร็จ
+      }
+    </script>
+  </body>
+</html>

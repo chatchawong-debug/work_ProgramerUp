@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>การทำซ้ำด้วย For Loop - สูตรคูณ</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 20px;
+            line-height: 1.6;
+        }
+        h3 {
+            color: #0056b3;
+            border-bottom: 2px solid #0056b3;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #28a745;
+            font-size: 1.8em;
+            margin-top: 20px;
+        }
+        p {
+            margin: 5px 0;
+        }
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+        .result-line {
+            font-size: 1.1em;
+            margin-left: 15px;
+        }
+    </style>
+</head>
+<body>
+    <center><h3>รับตัวเลขจาก prompt() แล้วแสดงสูตรคูณของตัวเลขนั้น</h3></center>
+    <script>
+        // รับค่าจากผู้ใช้ แล้วแปลงเป็นตัวเลข
+        const num = parseInt(prompt("ป้อนเลขที่ต้องการแสดงสูตรคูณ :)"));
+
+        // ตรวจสอบว่าผู้ใช้กรอกเลขจริงหรือไม่
+        if (!isNaN(num)) { // ตรวจสอบว่า num ไม่ใช่ NaN (Not a Number)
+            document.write(`<h2>สูตรคูณแม่ ${num}</h2>`);
+
+            // ใช้ for เพื่อแสดงสูตรคูณจาก 1 ถึง 12
+            for (let i = 1; i <= 12; i++) {
+                document.write(`<p class="result-line">${num} x ${i} = ${num * i}</p>`);
+            }
+        } else {
+            document.write("<p class='error'>กรุณากรอกตัวเลขที่ถูกต้อง</p>");
+        }
+    </script>
+</body>
+</html>

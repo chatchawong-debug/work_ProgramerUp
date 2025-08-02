@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <style>
+        /* Basic styling for the body */
+        body {
+            font-family: Tahoma, sans-serif;
+            max-width: 500px;
+            margin: 20px auto;
+            background-color: #f4f4f4; /* Light grey background */
+            color: #333; /* Darker text color */
+        }
+
+        /* Styling for the input field */
+        input[type="text"] {
+            padding: 10px;
+            width: 70%;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box; /* Include padding and border in the element's total width and height */
+        }
+
+        /* Styling for buttons */
+        button {
+            padding: 10px 15px;
+            background-color: #28a745; /* Green for add button */
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+        }
+
+        button:hover {
+            background-color: #218838; /* Darker green on hover */
+        }
+
+        /* Styling for the unordered list */
+        ul {
+            list-style: none; /* Remove default bullet points */
+            padding: 0;
+        }
+
+        /* Styling for list items */
+        li {
+            background-color: #fff;
+            padding: 10px 15px;
+            margin: 8px 0;
+            border-radius: 4px;
+            display: flex; /* Use flexbox for alignment of text and buttons */
+            justify-content: space-between; /* Space out content and buttons */
+            align-items: center; /* Vertically align items */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+        }
+
+        /* Styling for tasks based on their status */
+        li.pending {
+            color: green; /* Text color for pending tasks */
+            background-color: #e0ffe0;/* หากต้องการสีพื้นหลังด้วย */
+
+        }
+
+        li.completed {
+            text-decoration: line-through; /* Strikethrough for completed tasks */
+            color: red; /* Text color for completed tasks */
+            background-color: #ffe0e0;/* หากต้องการสีพื้นหลังด้วย */
+
+        }
+
+        /* Styling for delete button within list items */
+        li .delete-btn {
+            background-color: #dc3545; /* Red for delete button */
+            margin-left: 10px; /* Space between text and delete button */
+            padding: 5px 10px; /* Smaller padding for action buttons */
+        }
+
+        li .delete-btn:hover {
+            background-color: #c82333; /* Darker red on hover */
+        }
+
+        /* Styling for complete button within list items */
+        li .complete-btn {
+            background-color: #007bff; /* Blue for complete button */
+            margin-left: 5px;
+            padding: 5px 10px;
+        }
+
+        li .complete-btn:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+    </style>
+</head>
+<body>
+    <h2>สิ่งที่ต้องทำ (To-Do List)</h2>
+    <input type="text" id="taskInput" placeholder="เพิ่มงานที่ต้องทำ">
+    <button onclick="addTask()">เพิ่ม</button>
+    <ul id="taskList"></ul>
+
+    <script>
+        // Array to store tasks; each task is an object with 'text' and 'completed' properties
+        let tasks = [];
+
+        // Reference to the ul element where tasks will be displayed
+        const list = document.getElementById("taskList");
+
+        // Function to add a new task
+        function addTask() {
+            const taskInput = document.getElementById("taskInput");
+            const taskText = taskInput.value.trim(); // Get value and trim whitespace
+
+            // Don't add if input is empty
+            if (taskText === "") {
+                alert("กรุณากรอกงานที่ต้องทำ");
+                return;
+            }
+
+            // Add new task as an object
+            tasks.push({ text: taskText, completed: false });
+            updateList(); // Re-render the list
+            taskInput.value = ""; // Clear input after adding
+        }
+
+        // Function to mark a task as complete
+        function toggleComplete(index) {
+            tasks[index].completed = !tasks[index].completed; // Toggle the completed status
+            updateList(); // Re-render the list
+        }
+
+        // Function to delete a task
+        function deleteTask(index) {
+            tasks.splice(index, 1); // Remove the task at the given index
+            updateList(); // Re-render the list
+        }
+
+        // Function to display all tasks in the list
+        function updateList() {
+            list.innerHTML = ""; // Clear old list items
+
+            // Loop through the tasks array and create <li> for each item
+            tasks.forEach((task, index) => {
+                const li = document.createElement("li");
+                li.textContent = `${index + 1}. ${task.text}`;
+
+                // Add 'completed' class if the task is marked as complete
+                // หรือ 'pending' class ถ้ายังไม่เสร็จ
+                if (task.completed) {
+                    li.classList.add("completed");
+                } else {
+                    li.classList.add("pending"); // เพิ่ม class 'pending' สำหรับงานที่ยังไม่เสร็จ
+                }
+
+                // Create a "Complete" button
+                const completeBtn = document.createElement("button");
+                completeBtn.textContent = task.completed ? "ยกเลิก" : "เสร็จสิ้น"; // Text changes based on status
+                completeBtn.className = "complete-btn";
+                completeBtn.onclick = () => toggleComplete(index); // Attach toggle function
+
+                // Create a "Delete" button
+                const deleteBtn = document.createElement("button");
+                deleteBtn.textContent = "ลบ";
+                deleteBtn.className = "delete-btn";
+                deleteBtn.onclick = () => deleteTask(index); // Attach delete function
+
+                // Create a container for buttons to group them
+                const buttonContainer = document.createElement("div");
+                buttonContainer.appendChild(completeBtn);
+                buttonContainer.appendChild(deleteBtn);
+
+                // Append the button container to the list item
+                li.appendChild(buttonContainer);
+                list.appendChild(li); // Add the list item to the ul
+            });
+        }
+        // เรียก updateList() เพื่อแสดงผลงานที่มีอยู่ (ถ้ามี) เมื่อโหลดหน้าเว็บครั้งแรก
+        // (ในกรณีที่มีการโหลด tasks จาก local storage หรือ API)
+        // ถ้าไม่มีการโหลดข้อมูลจากที่อื่น ไม่ต้องมีบรรทัดนี้ก็ได้ เพราะ list จะว่างเปล่าอยู่แล้ว
+        // แต่ถ้าจะเพิ่มฟังก์ชันการบันทึก/โหลดข้อมูลในอนาคต บรรทัดนี้จะสำคัญ
+        // updateList(); // คอมเมนต์ไว้ก่อน เพราะตอนนี้ tasks เริ่มต้นว่างเปล่า
+    </script>
+</body>
+</html>

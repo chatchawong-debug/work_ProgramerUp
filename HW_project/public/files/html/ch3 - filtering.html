@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ค้นหารายชื่อ</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 500px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        input[type="text"] {
+            width: calc(100% - 22px); /* Full width minus padding and border */
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+            border: 1px solid #eee;
+            border-radius: 4px;
+            background-color: #fff;
+            max-height: 300px; /* Limit height and add scroll for many items */
+            overflow-y: auto;
+        }
+        li {
+            padding: 10px 15px;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        li:last-child {
+            border-bottom: none; /* No border for the last item */
+        }
+        li:hover {
+            background-color: #f0f0f0;
+        }
+        li.no-results {
+            color: #888;
+            text-align: center;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <h2>ค้นหารายชื่อ</h2>
+    <input type="text" id="search" placeholder="ค้นหาชื่อ...">
+
+    <ul id="namesList"></ul>
+
+    <script>
+        // อาร์เรย์ของรายชื่อทั้งหมด
+        const names = ["ปอ", "อิง", "กวาง", "ต้นปาล์ม", "เชียร์", "เอ๋", "การ์ตูน", "เจ้หยด", "แม่นิต"];
+
+        // อ้างอิง <ul> ที่จะใช้แสดงรายชื่อ
+        const nameListElement = document.getElementById("namesList"); // เปลี่ยนชื่อตัวแปรเป็น nameListElement เพื่อความชัดเจน
+
+        // อ้างอิง input ค้นหา
+        const searchBox = document.getElementById("search");
+
+        // ฟังก์ชันสำหรับ render (แสดง) รายการชื่อ
+        function renderList(filteredNames) {
+            nameListElement.innerHTML = ""; // ล้าง <ul> เดิมทุกครั้ง
+
+            // วนลูป filteredNames แล้วสร้าง <li> แสดงแต่ละชื่อ
+            if (filteredNames.length === 0) {
+                const li = document.createElement("li");
+                li.textContent = "ไม่พบรายชื่อที่ตรงกับการค้นหา";
+                li.classList.add("no-results");
+                nameListElement.appendChild(li);
+            } else {
+                filteredNames.forEach(name => {
+                    const li = document.createElement("li");
+                    li.textContent = name; // แสดงชื่อ
+                    nameListElement.appendChild(li);
+                });
+            }
+        }
+
+        // เมื่อผู้ใช้พิมพ์ในช่องค้นหา จะกรองข้อมูลแบบ real-time
+        searchBox.addEventListener("input", () => {
+            const keyword = searchBox.value.toLowerCase().trim(); // แปลงเป็นพิมพ์เล็กและตัดช่องว่าง
+            const result = names.filter(name => name.toLowerCase().includes(keyword)); // กรองชื่อที่มีคำค้นหา
+            renderList(result); // แสดงผลลัพธ์ที่กรองแล้ว
+        });
+            renderList(names); // แสดงรายชื่อทั้งหมดเมื่อเริ่มต้น
+    </script>
+</body>
+</html>
