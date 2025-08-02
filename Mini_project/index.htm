@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WealthFlow Lite</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>WealthFlow Lite</h1>
+        <p>เครื่องมือวางแผนรายจ่ายง่ายๆ แค่กรอกก็เห็นผล!</p>
+
+        <section class="input-section">
+            <h2>รายรับ (Income)</h2>
+            <div id="income-items">
+                <div class="input-group">
+                    <input type="text" placeholder="แหล่งรายรับ (เช่น เงินเดือน)" class="income-source">
+                    <input type="number" placeholder="จำนวนเงิน" min="0" class="income-amount">
+                    <button class="remove-btn">ลบ</button>
+                </div>
+            </div>
+            <button id="add-income-btn">เพิ่มรายรับ</button>
+        </section>
+
+        <section class="input-section">
+            <h2>รายจ่าย (Expenses)</h2>
+            <div id="expense-items">
+                <div class="input-group">
+                    <input type="text" placeholder="รายการรายจ่าย (เช่น ค่าอาหาร)" class="expense-item">
+                    <input type="number" placeholder="จำนวนเงิน" min="0" class="expense-amount">
+                    <select class="expense-category">
+                        <option value="จำเป็น">ค่าใช้จ่ายจำเป็น</option>
+                        <option value="ผันแปร">ค่าใช้จ่ายผันแปร</option>
+                        <option value="หนี้สิน">หนี้สิน</option>
+                        <option value="ความบันเทิง">ความบันเทิง</option>
+                        <option value="อื่นๆ">อื่นๆ</option>
+                    </select>
+                    <button class="remove-btn">ลบ</button>
+                </div>
+            </div>
+            <button id="add-expense-btn">เพิ่มรายจ่าย</button>
+        </section>
+
+        <button id="calculate-btn">คำนวณและดูผลลัพธ์</button>
+
+    <div id="popup-overlay" class="popup-overlay">
+        <div class="popup-content">
+            <span class="close-btn">&times;</span>
+            <h2>สรุปผลการวางแผนรายจ่าย</h2>
+            <div id="popup-results">
+                <p><strong>รวมรายรับทั้งหมด:</strong> <span id="popup-total-income">0</span> บาท</p>
+                <p><strong>รวมรายจ่ายทั้งหมด:</strong> <span id="popup-total-expenses">0</span> บาท</p>
+                <p><strong>เงินคงเหลือ/เงินออมที่คาดการณ์:</strong> <span id="popup-balance-amount">0</span> บาท</p>
+
+                <div id="popup-balance-message" class="message"></div>
+
+                <h3>สัดส่วนรายจ่าย</h3>
+                <div class="chart-container-popup">
+                    <canvas id="expense-chart-popup"></canvas>
+                </div>
+                
+                <h3>คำแนะนำเบื้องต้น</h3>
+                <div id="popup-advice-message" class="message"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
