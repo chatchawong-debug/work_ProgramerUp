@@ -1,117 +1,120 @@
-/* public/css/style.css */
+/* public/css/style.css - ปรับปรุงเป็นธีมสีพาสเทล */
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #1a2a4b; /* พื้นหลังสีน้ำเงินเข้ม */
-    color: #ecf0f1; /* สีตัวอักษรหลัก */
-    line-height: 1.6;
+    background-color: #f7f9fc; /* พื้นหลังสีฟ้าอ่อนพาสเทลมาก */
+    color: #4b5563; /* สีตัวอักษรหลัก (เทาอมน้ำเงิน) */
+    line-height: 1.7;
 }
 
 header {
-    background-color: #1a2a4b; /* สีกรมท่าเข้ม */
-    color: #ecf0f1;
-    padding: 1rem 0;
+    background-color: #e0f2f7; /* สีฟ้าอ่อนพาสเทล */
+    color: #3f51b5; /* สีน้ำเงินเข้มสำหรับข้อความหลักใน Header */
+    padding: 1.5rem 0;
     text-align: center;
-    box-shadow: none; /* ไม่มีเงา */
-    border-bottom: 2px solid #2c3e50;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08); /* เงาอ่อนๆ */
+    border-bottom: 1px solid #cce7ee; /* เส้นขอบอ่อนๆ */
 }
 
 header h1 {
     margin: 0;
-    font-size: 2.5em;
-    color: #ecf0f1;
+    font-size: 2.8em;
+    color: #536dfe; /* สีฟ้าอ่อนม่วงพาสเทลสดใส */
 }
 
 /* เมนูนำทาง (Navigation) */
 nav ul {
     list-style: none;
     padding: 0;
-    margin: 0.5rem 0 0;
+    margin: 0.75rem 0 0;
     display: flex;
     justify-content: center;
-    gap: 20px; /* ช่องว่างระหว่างเมนู */
+    gap: 25px;
 }
 
 nav ul li a {
-    color: #ecf0f1;
+    color: #6a7c8e; /* สีเทาอมน้ำเงินพาสเทล */
     text-decoration: none;
-    font-weight: bold;
-    padding: 0.5rem 1rem;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
+    font-weight: 500;
+    padding: 0.6rem 1.2rem;
+    border-radius: 0.3rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 nav ul li a:hover,
 nav ul li a:focus {
-    background-color: #34495e; /* สีเข้มขึ้นเมื่อเมาส์ชี้ */
+    background-color: #c9eff7; /* สีฟ้าอ่อนพาสเทลเมื่อโฮเวอร์ */
+    color: #3f51b5; /* สีน้ำเงินเข้มขึ้น */
 }
 
 main {
-    padding: 2rem;
-    max-width: 1200px;
-    margin: 20px auto;
-    background-color: #1a2a4b;
-    border-radius: 8px;
-    box-shadow: none;
+    padding: 2.5rem;
+    max-width: 1100px;
+    margin: 30px auto;
+    background-color: #ffffff; /* พื้นหลังสีขาวสำหรับเนื้อหาหลัก */
+    border-radius: 0.75rem; /* มุมโค้งมนมากขึ้น */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); /* เงาที่ชัดเจนขึ้นเล็กน้อย */
+    border: 1px solid #e0e7e9; /* ขอบอ่อนๆ */
 }
 
 .file-list h2 {
-    color: #ecf0f1;
+    color: #536dfe; /* สีฟ้าอ่อนม่วงพาสเทล */
     text-align: center;
-    margin-bottom: 1.5rem;
-    font-size: 2em;
+    margin-bottom: 2rem;
+    font-size: 2.4em;
+    border-bottom: 2px solid #a3bcfd; /* เส้นใต้สีฟ้าอ่อนม่วง */
+    padding-bottom: 0.75rem;
 }
 
 /* --- สไตล์สำหรับ Grid ของหมวดหมู่ --- */
 .categories-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 20px;
-    padding: 20px 0;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 25px;
+    padding: 25px 0;
 }
 
 .category-card {
-    background-color: #34495e;
-    border-radius: 8px;
+    background-color: #e8f4f8; /* สีฟ้าอ่อนพาสเทลสำหรับ card */
+    border-radius: 0.6rem;
     padding: 20px;
     text-align: center;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08); /* เงาอ่อนๆ */
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    min-height: 100px; /* ลดความสูงขั้นต่ำลงเมื่อไม่มีไอคอน */
+    justify-content: center;
+    align-items: center;
+    min-height: 110px; /* ปรับความสูงเล็กน้อย */
     position: relative;
     overflow: hidden;
+    border: 1px solid #dbeff4; /* ขอบอ่อนๆ */
 }
 
 .category-card:hover {
-    background-color: #4a6681;
-    transform: translateY(-5px);
+    background-color: #d1ecf1; /* สีฟ้าอ่อนลงเมื่อโฮเวอร์ */
+    transform: translateY(-5px); /* ยกขึ้นเล็กน้อย */
+    box-shadow: 0 7px 18px rgba(0, 0, 0, 0.12); /* เงาที่ชัดเจนขึ้น */
 }
 
 .category-card.expanded {
-    background-color: #2c3e50;
+    background-color: #ffffff; /* พื้นหลังสีขาวเมื่อขยาย */
     transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    border: 1px solid #536dfe; /* ขอบสีฟ้าอ่อนม่วง */
 }
 
 .card-header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    color: #ecf0f1;
+    color: #4b5563; /* สีตัวอักษรเข้ม */
 }
 
 .category-card h3 {
     margin: 0;
-    font-size: 1.8em;
-    color: #ecf0f1;
+    font-size: 1.7em;
+    color: #3f51b5; /* สีน้ำเงินเข้ม */
 }
 
 /* --- สไตล์สำหรับรายการย่อยที่ซ่อน/แสดงได้ --- */
@@ -119,96 +122,128 @@ main {
     list-style: none;
     padding: 15px 0 0;
     margin: 15px 0 0;
-    border-top: 1px solid #4a6681;
+    border-top: 1px solid #e0e7e9; /* เส้นแบ่งสีอ่อน */
     text-align: left;
-    background-color: #2c3e50;
-    border-radius: 5px;
-    padding: 10px;
-    box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+    background-color: #ffffff; /* พื้นหลังสีขาว */
+    border-radius: 0.6rem;
+    padding: 15px;
+    box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.04); /* เงาด้านในอ่อนๆ */
+    border: 1px solid #e8f4f8; /* ขอบอ่อนๆ */
 }
 
 .item-list h4 {
-    color: #7ed6df;
-    font-size: 1.1em;
+    color: #536dfe; /* สีฟ้าอ่อนม่วงพาสเทล */
+    font-size: 1.2em;
     margin-top: 0;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
     text-align: center;
 }
 
 .item-list li {
-    background-color: #34495e;
-    border: none;
-    border-radius: 4px;
+    background-color: #f7f9fc; /* พื้นหลังของแต่ละรายการย่อย */
+    border: 1px solid #e0e7e9; /* ขอบสีอ่อน */
+    border-radius: 0.4rem;
     margin-bottom: 8px;
-    padding: 8px 12px;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
-    transition: background-color 0.2s ease;
+    padding: 10px 15px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.02); /* เงาอ่อนๆ */
+    transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
 .item-list li:hover {
-    background-color: #4a6681;
+    background-color: #e3f5f8; /* สีฟ้าอ่อนลงเมื่อโฮเวอร์ */
+    transform: translateX(5px);
 }
 
 .item-list li a {
     text-decoration: none;
-    color: #ecf0f1;
+    color: #5f748b; /* สีข้อความลิงก์ (เทาอมฟ้า) */
     display: block;
+    transition: color 0.2s ease;
 }
 
 .item-list li a:hover {
-    color: #7ed6df;
+    color: #3f51b5; /* สีน้ำเงินเข้มขึ้นเมื่อโฮเวอร์ */
 }
 
 /* ข้อความแจ้งเตือน/โหลด */
 .message {
     text-align: center;
-    padding: 1em;
+    padding: 1.2em;
     font-style: italic;
-    color: #ecf0f1;
-    background-color: #34495e;
-    border-radius: 5px;
-    margin-bottom: 10px;
+    color: #6a7c8e;
+    background-color: #e0f2f7;
+    border-radius: 0.5rem;
+    margin-bottom: 15px;
+    border: 1px solid #cce7ee;
 }
 
+/* ส่วน "เกี่ยวกับฉัน" */
 .about-content {
-    background-color: #34495e;
-    color: #ecf0f1;
-    padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    background-color: #ffffff;
+    color: #4b5563;
+    padding: 2.5rem;
+    border-radius: 0.75rem;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e0e7e9;
 }
 
 .about-content h2 {
-    color: #7ed6df;
+    color: #536dfe;
+    border-bottom: 2px solid #a3bcfd;
+    padding-bottom: 0.75rem;
+    margin-bottom: 1.5rem;
 }
 
 .about-content h3 {
-    color: #ecf0f1;
+    color: #3f51b5;
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
 }
 
 .about-content p, .about-content ul li {
-    color: #bdc3c7;
+    color: #6a7c8e;
 }
 
 footer {
     text-align: center;
-    padding: 1.5rem;
-    margin-top: 2rem;
-    background-color: #1a2a4b;
-    color: #ecf0f1;
+    padding: 1.8rem;
+    margin-top: 3rem;
+    background-color: #e0f2f7;
+    color: #6a7c8e;
     font-size: 0.9em;
-    box-shadow: none;
-    border-top: 2px solid #2c3e50;
+    box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.08);
+    border-top: 1px solid #cce7ee;
 }
 
 /* การปรับ responsive สำหรับหน้าจอขนาดเล็ก */
 @media (max-width: 768px) {
+    header h1 {
+        font-size: 2.3em;
+    }
+
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+    }
+
+    nav ul li a {
+        padding: 0.5rem 1rem;
+    }
+
+    main {
+        padding: 1.5rem;
+        margin: 15px auto;
+    }
+
     .categories-grid {
         grid-template-columns: 1fr;
+        gap: 15px;
     }
 
     .category-card {
         min-height: auto;
+        padding: 18px;
     }
 
     .card-header {
@@ -222,5 +257,10 @@ footer {
     .item-list {
         margin-top: 10px;
         padding-top: 10px;
+        padding: 12px;
+    }
+
+    .item-list li {
+        padding: 8px 12px;
     }
 }
