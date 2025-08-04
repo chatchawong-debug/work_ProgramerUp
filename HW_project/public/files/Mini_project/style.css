@@ -1,0 +1,224 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f7f6;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* เพื่อให้เนื้อหาอยู่ด้านบนสุด */
+    min-height: 100vh;
+}
+
+.container {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    width: 100%;
+    margin-top: 20px;
+}
+
+h1, h2, h3 {
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.input-section {
+    border: 1px solid #e0e0e0;
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 30px;
+    background-color: #f9f9f9;
+}
+
+.input-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+    align-items: center;
+}
+
+.input-group input,
+.input-group select {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.input-group .remove-btn {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.2s;
+}
+
+.input-group .remove-btn:hover {
+    background-color: #c0392b;
+}
+
+button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+    margin-top: 10px;
+    transition: background-color 0.2s;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+#calculate-btn {
+    background-color: #27ae60;
+    margin-bottom: 30px;
+}
+
+#calculate-btn:hover {
+    background-color: #229954;
+}
+
+.results-section {
+    background-color: #ecf0f1;
+    padding: 25px;
+    border-radius: 8px;
+    border: 1px solid #dcdcdc;
+}
+
+.results-section p {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.results-section strong {
+    color: #2c3e50;
+}
+
+.balance-positive {
+    color: #27ae60;
+    font-weight: bold;
+}
+
+.balance-negative {
+    color: #e74c3c;
+    font-weight: bold;
+}
+
+.message {
+    padding: 10px 15px;
+    border-radius: 5px;
+    margin-top: 15px;
+    font-style: italic;
+    font-size: 15px;
+}
+
+.message.positive {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.message.negative {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.chart-container {
+    max-width: 400px;
+    margin: 20px auto;
+}
+
+/* Pop-up Styles */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* ทึบแสง */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* ให้อยู่บนสุด */
+    visibility: hidden; /* ซ่อนไว้ก่อน */
+    opacity: 0;
+    transition: visibility 0s, opacity 0.3s ease;
+}
+
+.popup-overlay.active {
+    visibility: visible;
+    opacity: 1;
+}
+
+.popup-content {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+    max-width: 600px;
+    width: 90%;
+    position: relative;
+    transform: translateY(-20px); /* เลื่อนขึ้นเล็กน้อยตอนโผล่มา */
+    transition: transform 0.3s ease;
+}
+
+.popup-overlay.active .popup-content {
+    transform: translateY(0);
+}
+
+.popup-content h2 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 25px;
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 28px;
+    cursor: pointer;
+    color: #aaa;
+}
+
+.close-btn:hover {
+    color: #333;
+}
+
+#popup-results p {
+    font-size: 17px;
+    margin-bottom: 8px;
+}
+
+#popup-results strong {
+    color: #2c3e50;
+}
+
+#popup-results .message {
+    font-size: 14px;
+    padding: 8px 12px;
+}
+
+.chart-container-popup {
+    max-width: 350px; /* ขนาดกราฟในป๊อปอัพ */
+    margin: 20px auto;
+}
+
+/* ซ่อนส่วนแสดงผลเดิมบนหน้าเว็บหลัก */
+.results-section {
+    display: none; 
+}
