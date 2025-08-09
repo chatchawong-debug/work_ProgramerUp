@@ -47,7 +47,8 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         {
             name: "Project",
-            items: [ { name: "WealthFlow Lite", path: "files/Mini_project/index.htm" }
+            items: [
+                 { name: "WealthFlow Lite", path: "files/Mini_project/index.htm" }
             ]
         },
         {
